@@ -504,6 +504,182 @@ body.entered .hero-photo{animation:unveil 1.1s var(--ease) .5s backwards}
   color:rgba(239,231,215,.035);pointer-events:none;user-select:none;
 }
 
+/* students' notes */
+.notes{
+  position:relative;max-width:1440px;margin:0 auto;
+  padding:clamp(68px,9vh,104px) clamp(24px,7vw,110px) clamp(24px,3.4vh,40px);
+  display:grid;grid-template-columns:300px minmax(0,1fr);
+  gap:clamp(42px,7vw,96px);align-items:start;
+}
+.notes-head{position:relative}
+.notes-head .sec-desc{max-width:270px}
+.notes-stamp{
+  margin-top:30px;width:48px;height:48px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  border:1px solid rgba(163,56,40,.45);color:var(--red);
+  font-family:var(--kai);font-size:13px;line-height:1.35;letter-spacing:.08em;
+  transform:rotate(-5deg);cursor:pointer;
+  transition:background .3s,transform .3s var(--ease);
+}
+.notes-stamp:hover{background:rgba(163,56,40,.07);transform:rotate(-5deg) scale(1.06)}
+.notes-stamp:active{transform:rotate(-5deg) scale(.96)}
+.notes-stamp span{display:block;white-space:nowrap}
+.notes-deck{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(22px,2.4vw,34px);padding-top:16px;align-items:start;
+}
+.note{
+  position:relative;
+  padding:clamp(26px,2.4vw,34px) clamp(22px,2vw,28px) clamp(22px,2vw,28px);
+  background:
+    linear-gradient(155deg,rgba(255,255,255,.5),rgba(255,255,255,0) 42%),
+    linear-gradient(160deg,#fbf6e9,#f4ead7);
+  border:1px solid rgba(176,138,79,.32);
+  box-shadow:0 18px 36px -18px rgba(78,58,34,.22),0 2px 0 rgba(255,255,255,.5) inset;
+  rotate:var(--r,-1deg);
+  transition:rotate .5s var(--ease),box-shadow .5s var(--ease);
+}
+.note:hover{rotate:0deg;box-shadow:0 24px 44px -20px rgba(78,58,34,.28)}
+.note-tape{
+  position:absolute;top:-9px;left:50%;width:70px;height:18px;
+  transform:translateX(-50%) rotate(-1.4deg);
+  background:linear-gradient(90deg,rgba(214,189,146,.26),rgba(214,189,146,.52),rgba(214,189,146,.26));
+  border-left:1px dashed rgba(255,255,255,.55);
+  border-right:1px dashed rgba(255,255,255,.55);
+  box-shadow:0 2px 5px rgba(90,66,40,.08);
+  pointer-events:none;
+}
+.note:nth-child(2) .note-tape{transform:translateX(-50%) rotate(1.5deg)}
+.note:nth-child(3) .note-tape{transform:translateX(-50%) rotate(.8deg)}
+.note:nth-child(4) .note-tape{transform:translateX(-50%) rotate(-2deg)}
+.note:nth-child(2),.note:nth-child(4){margin-top:22px}
+.note-no{
+  display:block;font-family:var(--sans);font-size:8px;letter-spacing:.26em;
+  color:var(--gold);
+}
+.note h3{
+  margin:13px 0 10px;font-family:var(--kai);font-weight:400;
+  font-size:clamp(24px,2vw,29px);line-height:1.2;letter-spacing:.08em;color:var(--ink);
+}
+.note p{font-size:13.5px;line-height:1.95;color:var(--ink-70);letter-spacing:.02em}
+.quote-keep{white-space:nowrap}
+.note-aside{margin-top:15px;font-family:var(--kai);font-size:11.5px;letter-spacing:.06em;color:var(--ink-50)}
+.note-secret{
+  display:flex;flex-direction:column;
+  min-height:clamp(220px,18vw,245px);
+  background:
+    linear-gradient(155deg,rgba(255,255,255,.06),rgba(255,255,255,0) 45%),
+    linear-gradient(160deg,#24352c,#1c2822);
+  border-color:rgba(214,189,146,.28);
+  color:#efe7d7;
+  box-shadow:0 22px 40px -20px rgba(0,0,0,.45);
+}
+.note-secret:hover{box-shadow:0 28px 48px -22px rgba(0,0,0,.5)}
+.note-secret[open]{rotate:0deg}
+.note-secret .note-tape{display:none}
+.note-secret .note-no{color:#c9ab77}
+.note-secret summary{display:flex;flex-direction:column;flex:1;list-style:none;cursor:pointer;position:relative}
+.note-secret summary::-webkit-details-marker{display:none}
+.note-secret .note-title{
+  display:block;margin:13px 0 10px;padding-right:38px;
+  font-family:var(--kai);font-size:clamp(24px,2vw,29px);line-height:1.2;
+  letter-spacing:.08em;color:#f1e9d9;
+}
+.secret-stamp{
+  position:absolute;top:0;right:0;width:32px;height:32px;display:grid;place-items:center;
+  border:1px solid rgba(239,231,215,.5);color:#e8d8b8;
+  font-family:var(--kai);font-size:16px;transform:rotate(6deg);opacity:.85;
+}
+.secret-hint{
+  display:inline-flex;align-self:flex-start;align-items:center;gap:7px;padding-bottom:4px;
+  font-family:var(--sans);font-size:8.5px;letter-spacing:.2em;color:#c9ab77;
+  border-bottom:1px dotted rgba(201,171,119,.6);
+}
+.secret-hint::after{content:"＋";font-size:11px;line-height:1}
+.note-secret[open] .secret-hint::after{content:"－"}
+.secret-foot{
+  margin-top:auto;padding-top:16px;border-top:1px solid rgba(214,189,146,.14);
+  font-family:var(--sans);font-size:8px;letter-spacing:.22em;
+  color:rgba(201,171,119,.62);
+}
+.note-secret[open] .secret-foot{display:none}
+.secret-body{
+  margin-top:16px;padding-top:16px;
+  border-top:1px dashed rgba(239,231,215,.25);
+  animation:unfold .55s var(--ease) both;
+}
+.secret-body .method{
+  font-family:var(--kai);font-size:clamp(20px,1.7vw,24px);
+  line-height:1.5;letter-spacing:.08em;color:#f1e3c6;
+}
+.secret-body p:not(.method){margin-top:9px;font-size:13px;line-height:1.9;color:rgba(239,231,215,.82)}
+.secret-body p.classified{
+  margin-top:15px;font-family:var(--sans);font-size:8.5px;
+  letter-spacing:.26em;color:#c9ab77;
+}
+.notes + .intro-footer{padding-top:clamp(48px,6vh,72px)}
+
+/* easter egg: the teacher's avatar */
+.egg{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:clamp(18px,4vw,40px)}
+.egg[hidden]{display:none}
+.egg-veil{
+  position:absolute;inset:0;background:rgba(20,30,24,.76);
+  -webkit-backdrop-filter:blur(8px) saturate(.8);backdrop-filter:blur(8px) saturate(.8);
+  opacity:0;transition:opacity .32s var(--ease);
+}
+.egg-card{
+  position:relative;width:min(760px,94vw);max-height:min(86vh,720px);overflow:auto;
+  display:grid;grid-template-columns:minmax(230px,.92fr) 1.08fr;
+  gap:clamp(24px,3vw,38px);padding:clamp(22px,3vw,34px);
+  background:
+    linear-gradient(155deg,rgba(255,255,255,.55),rgba(255,255,255,0) 48%),
+    linear-gradient(160deg,#fbf6e9,#f1e6d2);
+  border:1px solid rgba(176,138,79,.4);
+  box-shadow:0 40px 80px -30px rgba(10,18,13,.55),0 1px 0 rgba(255,255,255,.6) inset;
+  opacity:0;transform:translateY(16px) rotate(1.2deg);
+  transition:opacity .38s var(--ease),transform .5s var(--ease);
+}
+.egg.is-open .egg-veil{opacity:1}
+.egg.is-open .egg-card{opacity:1;transform:translateY(0) rotate(-.8deg)}
+.egg-photo{
+  position:relative;align-self:center;margin:0;
+  padding:10px 10px 34px;background:#fffdf8;
+  border:1px solid rgba(176,138,79,.28);
+  box-shadow:0 20px 40px -24px rgba(30,42,35,.45);
+  transform:rotate(-2.2deg);
+}
+.egg-photo::before{
+  content:"";position:absolute;top:-10px;left:50%;width:86px;height:22px;
+  transform:translateX(-50%) rotate(-3deg);
+  background:linear-gradient(90deg,rgba(214,189,146,.3),rgba(214,189,146,.56),rgba(214,189,146,.3));
+  border-left:1px dashed rgba(255,255,255,.5);border-right:1px dashed rgba(255,255,255,.5);
+  opacity:.85;
+}
+.egg-photo img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;filter:saturate(.94) contrast(1.02)}
+.egg-photo figcaption{
+  position:absolute;left:13px;bottom:9px;
+  font-family:var(--kai);font-size:11px;letter-spacing:.14em;color:var(--ink-40);
+}
+.egg-copy{display:flex;flex-direction:column;justify-content:center;min-width:0;padding-right:6px}
+.egg-kicker{font-family:var(--sans);font-size:8px;letter-spacing:.24em;color:var(--red)}
+.egg-copy h3{
+  margin:14px 0 12px;font-family:var(--kai);font-weight:400;
+  font-size:clamp(28px,3vw,38px);line-height:1.12;letter-spacing:.06em;color:var(--ink);
+}
+.egg-copy p{font-size:13.5px;line-height:2;letter-spacing:.02em;color:var(--ink-70)}
+.egg-sign{
+  margin-top:22px;padding-top:12px;border-top:1px solid var(--ink-15);
+  font-family:var(--sans);font-size:8px;letter-spacing:.16em;color:var(--ink-40);
+}
+.egg-close{
+  position:absolute;top:8px;right:10px;z-index:2;
+  width:34px;height:34px;display:grid;place-items:center;
+  font-family:var(--sans);font-size:21px;line-height:1;color:var(--ink-50);border-radius:50%;
+  transition:background .25s,color .25s;
+}
+.egg-close:hover{background:rgba(30,42,35,.07);color:var(--ink)}
+html.egg-lock{overflow:hidden}
+
 /* footer */
 .intro-footer{position:relative;padding:clamp(64px,9vh,96px) clamp(24px,7vw,110px) 38px;max-width:1440px;margin:0 auto}
 .foot-main{display:flex;flex-direction:column;align-items:center;text-align:center}
@@ -537,6 +713,7 @@ body.entered .hero-photo{animation:unveil 1.1s var(--ease) .5s backwards}
 /* keyframes */
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes unveil{from{opacity:0;transform:translateY(28px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes unfold{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 
 /* ============================================================
    RESPONSIVE
@@ -553,6 +730,13 @@ body.entered .hero-photo{animation:unveil 1.1s var(--ease) .5s backwards}
   .journey{grid-template-columns:280px minmax(0,1fr);gap:56px}
   .hero{grid-template-columns:minmax(270px,.78fr) minmax(0,1.22fr);gap:48px}
   .hero h1{font-size:72px}
+  .notes{grid-template-columns:240px minmax(0,1fr);gap:44px}
+}
+@media (max-width:1000px) and (min-width:901px){
+  .notes{grid-template-columns:1fr;gap:32px}
+  .notes-head .sec-desc{max-width:100%}
+  .notes-stamp{position:absolute;right:0;top:34px;margin:0;width:44px;height:44px;font-size:12px}
+  .notes-deck{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}
 }
 @media (max-width:900px){
   .cover-inner{
@@ -601,6 +785,12 @@ body.entered .hero-photo{animation:unveil 1.1s var(--ease) .5s backwards}
   .timeline{padding-left:32px;margin-top:12px}
   .entry::before{left:-36.5px}
   .entry{padding-bottom:38px}
+  .notes{grid-template-columns:1fr;padding:56px 26px 22px;gap:32px}
+  .notes-head .sec-desc{max-width:100%}
+  .notes-stamp{position:absolute;right:0;top:34px;margin:0;width:44px;height:44px;font-size:12px}
+  .notes-deck{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;padding-top:14px}
+  .note:nth-child(2),.note:nth-child(4){margin-top:18px}
+  .notes + .intro-footer{padding-top:48px}
   .philosophy{padding:64px 26px 58px}
   .philosophy::before{inset:10px}
   .philosophy blockquote{font-size:clamp(21px,5.4vw,36px);line-height:1.9}
@@ -618,6 +808,25 @@ body.entered .hero-photo{animation:unveil 1.1s var(--ease) .5s backwards}
   .enter-wrap{width:auto}
   .enter{width:auto;min-width:300px;justify-content:space-between}
 }
+@media (max-width:600px){
+  .notes-deck{grid-template-columns:1fr;gap:22px}
+  .note:nth-child(n){margin-top:0}
+  .note{rotate:0deg}
+  .note-secret{min-height:0}
+  .egg{padding:14px}
+  .egg-card{
+    width:100%;max-height:90svh;grid-template-columns:1fr;gap:18px;
+    padding:20px 18px 22px;transform:translateY(12px) rotate(.6deg);
+  }
+  .egg.is-open .egg-card{transform:translateY(0) rotate(0)}
+  .egg-photo{width:min(250px,68vw);justify-self:center;padding:8px 8px 30px}
+  .egg-photo::before{width:74px;height:19px;top:-8px}
+  .egg-copy{padding:0;text-align:center;align-items:center}
+  .egg-copy h3{font-size:30px;margin:10px 0}
+  .egg-copy p{font-size:13px;line-height:1.9}
+  .egg-sign{width:100%;margin-top:16px;padding-top:12px;font-size:7.5px}
+  .egg-close{top:6px;right:6px;background:rgba(242,235,221,.86)}
+}
 @media (max-width:430px){
   .brandline p{font-size:9.5px;letter-spacing:.22em}
   .top-right{display:none}
@@ -629,6 +838,10 @@ body.entered .hero-photo{animation:unveil 1.1s var(--ease) .5s backwards}
   .facts{flex-direction:column;gap:16px}
   .entry h3{font-size:19px}
   .philosophy blockquote{font-size:clamp(20px,6vw,23px)}
+  .notes{padding:46px 22px 18px}
+  .notes-stamp{top:28px;width:40px;height:40px}
+  .note{padding:26px 20px 22px}
+  .note h3,.note-secret .note-title{font-size:25px}
   .foot-line{font-size:17px}
   .foot-meta span:last-child{display:none}
 }
@@ -846,6 +1059,58 @@ body.entered .hero-photo{animation:unveil 1.1s var(--ease) .5s backwards}
     </div>
   </section>
 
+  <section class="notes" aria-labelledby="notes-title">
+    <div class="notes-head reveal">
+      <p class="sec-no">03 / AFTER CLASS</p>
+      <h2 class="sec-title" id="notes-title">学生私藏</h2>
+      <p class="sec-desc">有些话，平时不好意思说。<br>比如，她真的会偷偷给学生买奶茶。</p>
+      <p class="sec-en">OFF THE RECORD</p>
+      <button class="notes-stamp" type="button" id="egg-open" aria-haspopup="dialog" aria-controls="egg" aria-label="打开学生私藏彩蛋：张老师的头像" title="学生私藏，点开看看"><span>私</span><span>藏</span></button>
+    </div>
+
+    <div class="notes-deck">
+      <article class="note reveal" style="--r:-1.1deg">
+        <span class="note-tape" aria-hidden="true"></span>
+        <p class="note-no">01 / 学生认证</p>
+        <h3>宽容大方</h3>
+        <p>作业晚交一天，她只说<span class="quote-keep">「下次记得」</span>。<br>在她班里，犯错可以，撒谎不行。</p>
+        <p class="note-aside">—— 全班一致同意</p>
+      </article>
+
+      <article class="note reveal" style="--r:.9deg;--d:.06s">
+        <span class="note-tape" aria-hidden="true"></span>
+        <p class="note-no">02 / 日常</p>
+        <h3>温柔善良</h3>
+        <p>说话总是轻轻的，批评也是。<br>可该护着我们的时候，一步都不让。</p>
+        <p class="note-aside">—— 全班都这么说</p>
+      </article>
+
+      <article class="note reveal" style="--r:.5deg;--d:.12s">
+        <span class="note-tape" aria-hidden="true"></span>
+        <p class="note-no">03 / 小卖部</p>
+        <h3>奶茶零食</h3>
+        <p>她舍得给学生买奶茶、买零食。<br>理由是：长身体的时候，不能饿着。</p>
+        <p class="note-aside">—— 全班都喝过</p>
+      </article>
+
+      <details class="note note-secret reveal" style="--r:-1.4deg;--d:.18s">
+        <summary>
+          <span class="note-tape" aria-hidden="true"></span>
+          <span class="note-no">04 / 内部资料</span>
+          <span class="secret-stamp" aria-hidden="true">秘</span>
+          <span class="note-title">隐藏学习技巧</span>
+          <span class="secret-hint">拆开看看 · 别外传</span>
+          <span class="secret-foot" aria-hidden="true">内部资料 · 请勿外传</span>
+        </summary>
+        <div class="secret-body">
+          <p class="method">直接选取正确答案法</p>
+          <p>看哪个选项最像正确答案，就选哪个。</p>
+          <p class="classified">此方法不告诉一般人。</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
   <footer class="intro-footer">
     <div class="foot-main reveal">
       <span class="foot-seal" aria-hidden="true">敬</span>
@@ -862,6 +1127,23 @@ body.entered .hero-photo{animation:unveil 1.1s var(--ease) .5s backwards}
     </div>
   </footer>
 </main>
+
+<div class="egg" id="egg" hidden>
+  <div class="egg-veil" data-egg-close></div>
+  <div class="egg-card" role="dialog" aria-modal="true" aria-labelledby="egg-title">
+    <button class="egg-close" type="button" data-egg-close aria-label="关闭彩蛋">&times;</button>
+    <figure class="egg-photo">
+      <img data-egg-photo alt="雨中的龙猫和举着红伞的小女孩，张老师的微信头像">
+      <figcaption>微信头像 · 学生截屏</figcaption>
+    </figure>
+    <div class="egg-copy">
+      <p class="egg-kicker">TOP SECRET / 学生偷看版</p>
+      <h3 id="egg-title">张老师的头像</h3>
+      <p>我们偷偷觉得，这像她：<br>看着有点凶，其实一直在给人撑伞。</p>
+      <p class="egg-sign">仅限内部传阅 · 看完就当没看见</p>
+    </div>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -891,6 +1173,23 @@ body.entered .hero-photo{animation:unveil 1.1s var(--ease) .5s backwards}
     next();
   }
   Array.prototype.forEach.call(document.querySelectorAll("img[data-photo]"), loadPhoto);
+
+  /* ---------- easter egg avatar ---------- */
+  var EGG_PHOTOS = [
+    "https://testingcf.jsdelivr.net/gh/2012hyl/imgbed@main/images/20261122_2101_zhang-avatar.jpg",
+    "https://2012hyl.github.io/imgbed/images/20261122_2101_zhang-avatar.jpg",
+    "assets/zhang-avatar.jpg"
+  ];
+  var eggPhoto = document.querySelector("[data-egg-photo]");
+  if(eggPhoto){
+    var ep = 0;
+    function eggNextPhoto(){
+      if(ep >= EGG_PHOTOS.length){ eggPhoto.removeEventListener("error", eggNextPhoto); return; }
+      eggPhoto.src = EGG_PHOTOS[ep++];
+    }
+    eggPhoto.addEventListener("error", eggNextPhoto);
+    eggNextPhoto();
+  }
 
   /* ---------- enter / leave ---------- */
   function setupReveal(){
@@ -937,8 +1236,56 @@ body.entered .hero-photo{animation:unveil 1.1s var(--ease) .5s backwards}
     btn.addEventListener("click", function(e){ e.preventDefault(); leave(); });
   });
 
+  /* ---------- the hidden avatar ---------- */
+  var egg = document.getElementById("egg");
+  var eggTrigger = document.getElementById("egg-open");
+  var pageMain = document.querySelector("main");
+  var eggLastFocus = null;
+  var eggTimer = null;
+
+  function openEgg(){
+    if(!egg || !egg.hidden) return;
+    window.clearTimeout(eggTimer);
+    eggLastFocus = eggTrigger || document.activeElement;
+    egg.hidden = false;
+    if(pageMain){ pageMain.inert = true; }
+    document.documentElement.classList.add("egg-lock");
+    window.requestAnimationFrame(function(){
+      egg.classList.add("is-open");
+      var close = egg.querySelector(".egg-close");
+      if(close){ close.focus({ preventScroll: true }); }
+    });
+  }
+
+  function closeEgg(){
+    if(!egg || egg.hidden) return false;
+    egg.classList.remove("is-open");
+    if(pageMain){ pageMain.inert = false; }
+    document.documentElement.classList.remove("egg-lock");
+    window.clearTimeout(eggTimer);
+    eggTimer = window.setTimeout(function(){ egg.hidden = true; }, 300);
+    if(eggLastFocus && typeof eggLastFocus.focus === "function"){
+      eggLastFocus.focus({ preventScroll: true });
+    }
+    return true;
+  }
+
+  if(eggTrigger){ eggTrigger.addEventListener("click", openEgg); }
+  Array.prototype.forEach.call(document.querySelectorAll("[data-egg-close]"), function(el){
+    el.addEventListener("click", closeEgg);
+  });
+
   document.addEventListener("keydown", function(e){
-    if(e.key === "Escape" && entered){ leave(); }
+    if(e.key === "Escape"){
+      if(egg && !egg.hidden){ e.preventDefault(); closeEgg(); return; }
+      if(entered){ leave(); }
+      return;
+    }
+    if(e.key === "Tab" && egg && !egg.hidden){
+      e.preventDefault();
+      var close = egg.querySelector(".egg-close");
+      if(close){ close.focus({ preventScroll: true }); }
+    }
   });
 
   if(location.hash === "#intro"){ enter(false); }
